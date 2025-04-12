@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="order.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                <h3>Rhys' Staff Panel</h3>
+            </div>
+            <ul class="nav-options">
+                <li><i class="fa-solid fa-table-columns"></i> <a href="index.html">Panel</a></li>
+                <li><i class="fas fa-box-open icon"></i> Orders</li>
+                <li><i class="fas fa-user-circle icon"></i> Profile</li>
+                <li><i class="fas fa-cogs icon"></i> Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h3>Orders</h3>
+            </div>
+
+            <!-- Orders List Section -->
+            <div class="orders-list" id="ordersList">
+                <!-- Orders will be dynamically rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Order Modal -->
+    <div class="modal" id="editOrderModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Edit Order</h3>
+            <div class="edit-fields">
+                <input type="text" id="editStaffName" placeholder="Staff Name">
+                <input type="text" id="editDescription" placeholder="Order Description">
+                <input type="number" id="editAmount" placeholder="Amount (Robux)">
+                <input type="number" id="editUSD" placeholder="Amount (USD)">
+                <select id="editStatus">
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button id="saveOrderChanges">Save Changes</button>
+                <button id="deleteOrder">Delete Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="orders.js"></script>
+</body>
+</html>

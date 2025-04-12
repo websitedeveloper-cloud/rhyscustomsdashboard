@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notification -->
+<div id="toast" class="toast">
+    Order Log Successful
+</div>
+<!-- Toast notification for error -->
+<div class="toast" id="toast"></div>
+
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                <h3>Rhys' Staff Panel</h3>
+            </div>
+            <ul class="nav-options">
+                <li><i class="fa-solid fa-table-columns"></i> Panel</li>
+                <li><i class="fas fa-box-open icon"></i> <a href="orders.html">Orders</a></li>
+                <li><i class="fas fa-user-circle icon"></i> Profile</li>
+                <li><i class="fas fa-cogs icon"></i> Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="title">
+                    <h3>Rhys' Dashboard</h3>
+                </div>
+
+                <!-- Header Icons -->
+                <div class="header-icons">
+                    <!-- Notification Bell -->
+                    <div class="notification-bell" id="notificationBell">
+                        <i class="fas fa-bell"></i>
+                        <div class="notifications-dropdown" id="notificationDropdown">
+                            <ul>
+                                <li>New Notification 1</li>
+                                <li>New Notification 2</li>
+                                <li>New Notification 3</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div class="profile" id="profile">
+                        <img src="https://via.placeholder.com/40" alt="Profile Picture" />
+                        <span>Username</span>
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <ul>
+                                <li>Profile Settings</li>
+                                <li class="logout" id="logout">Logout</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Log Section -->
+            <div class="order-log">
+                <h2>Log Order</h2>
+                <div class="order-fields">
+                    <input type="text" id="staff-name" placeholder="Staff Name" />
+                    <input type="text" id="order-description" placeholder="Order Description" />
+                    <input type="number" id="order-amount" placeholder="Amount" />
+                    <input type="number" id="order-usd" placeholder="Amount in USD" />
+                    <select id="order-status">
+                        <option value="pending">Pending</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error-message"></div>
+                <button id="log-order-button">Log Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
