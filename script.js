@@ -53,6 +53,6 @@ document.getElementById("log-order-button").addEventListener("click", function (
 const username = localStorage.getItem('username');
 if (username) {
   // Show the username on the top right
-  document.getElementById('username-display').textContent = username;
+  document.getElementById('profile').textContent = username;
 }
 
