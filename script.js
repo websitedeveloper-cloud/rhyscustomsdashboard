@@ -1,80 +1,63 @@
-// Select DOM elements
-const card = document.getElementById('card');
-const toSignup = document.getElementById('toSignup');
-const toLogin = document.getElementById('toLogin');
-const loginForm = document.getElementById('loginForm');
-const signupForm = document.getElementById('signupForm');
-const toast = document.getElementById('toast');
-
-// Switch between signup and login forms
-toSignup.addEventListener('click', () => card.classList.add('flipped'));
-toLogin.addEventListener('click', () => card.classList.remove('flipped'));
-
-// Function to show toast messages
-function showToast(message, success = false) {
-  toast.textContent = message;
-  toast.style.background = success ? '#4caf50' : '#e53935'; // Green for success, red for error
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-// Email validation function
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-// Signup form submission handler
-signupForm.addEventListener('submit', e => {
-  e.preventDefault();
+// Function to display the username at the top right if it exists in localStorage
+document.addEventListener("DOMContentLoaded", function () {
+  const username = localStorage.getItem('username');
   
-  const username = document.getElementById('signupUsername').value;
-  const email = document.getElementById('signupEmail').value;
-  const password = document.getElementById('signupPassword').value;
-
-  if (!username || !email || !password) {
-    return showToast('Please fill in all fields.');
-  }
-  
-  if (!isValidEmail(email)) {
-    return showToast('Invalid email format.');
-  }
-
-  // Store user data in localStorage
-  const userData = { username, email, password };
-  localStorage.setItem('userData', JSON.stringify(userData));
-
-  showToast('Account created successfully!', true);
-  signupForm.reset();
-
-  // After success, switch to login screen after a brief delay
-  setTimeout(() => card.classList.remove('flipped'), 2000);
-});
-
-// Login form submission handler
-loginForm.addEventListener('submit', e => {
-  e.preventDefault();
-  
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-
-  // Retrieve stored user data from localStorage
-  const storedData = JSON.parse(localStorage.getItem('userData'));
-
-  if (!storedData) {
-    return showToast('No account found. Please sign up.');
-  }
-
-  if (storedData.email === email && storedData.password === password) {
-    showToast('Login successful!', true);
-
-    // Store the username in localStorage (for session)
-    localStorage.setItem('username', storedData.username);
-
-    // Redirect to Website B (Dashboard)
-    setTimeout(() => {
-      window.location.href = 'https://rhyscustomsdashboard.netlify.app'; // Change this to your actual Website B URL
-    }, 2000);
+  if (username) {
+    // Show the username on the top right (assuming there's a span with id 'profile')
+    document.getElementById('profile').textContent = username;
   } else {
-    showToast('Incorrect email or password.');
+    console.log("No username found in localStorage");
   }
+
+  // Event listener for logging an order
+  document.getElementById("log-order-button").addEventListener("click", function () {
+    // Retrieve input field values
+    const staffName = document.getElementById("staff-name").value;
+    const description = document.getElementById("order-description").value;
+    const amount = document.getElementById("order-amount").value;
+    const usdAmount = document.getElementById("order-usd").value;
+    const status = document.getElementById("order-status").value;
+
+    // Check if all fields are filled
+    if (!staffName || !description || !amount || !usdAmount) {
+      // Show error message if fields are empty
+      document.getElementById("error-message").innerText = "All fields are required!";
+      return;
+    }
+
+    // Create order object
+    const order = {
+      id: Date.now(),
+      staffName,
+      description,
+      amount,
+      usdAmount,
+      status,
+    };
+
+    // Get existing orders from localStorage or initialize an empty array
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    // Add new order to the list
+    orders.push(order);
+
+    // Save updated orders back to localStorage
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    // Show toast notification for order success
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+
+    // Hide toast after 3 seconds
+    setTimeout(function () {
+      toast.classList.remove("show");
+    }, 3000);
+
+    // Clear the input fields after logging the order
+    document.getElementById("staff-name").value = "";
+    document.getElementById("order-description").value = "";
+    document.getElementById("order-amount").value = "";
+    document.getElementById("order-usd").value = "";
+    document.getElementById("order-status").value = "pending";
+  });
 });
