@@ -48,3 +48,11 @@ document.getElementById("log-order-button").addEventListener("click", function (
     document.getElementById("order-usd").value = "";
     document.getElementById("order-status").value = "pending";
 });
+
+// On a different website or page that shares the same domain
+const username = localStorage.getItem('username');
+if (username) {
+  // Show the username on the top right
+  document.getElementById('username-display').textContent = username;
+}
+
